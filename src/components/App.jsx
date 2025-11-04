@@ -7,6 +7,7 @@ import AnimationWrapper from './AnimationWrapper';
 import GlobalStyles from '../styles/GlobalStyles';
 import { GameProvider, useGame } from '../context/GameContext';
 import useKeyboardInput from '../hooks/useKeyboardInput';
+import useAudioFeedback from '../hooks/useAudioFeedback';
 
 const AppContainer = styled.div`
   display: flex;
@@ -51,6 +52,33 @@ const ModeToggle = styled.button`
   }
 `;
 
+const SoundToggle = styled.button`
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.75rem;
+  font-size: 1.5rem;
+  background-color: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+
+  &:hover {
+    background-color: #f5f5f5;
+    border-color: #bdbdbd;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
 function GameContent() {
   const {
     targetLetter,
@@ -63,6 +91,9 @@ function GameContent() {
   } = useGame();
 
   const [pressedKey, setPressedKey] = useState(null);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+
+  const { playCorrect, playIncorrect } = useAudioFeedback(soundEnabled);
 
   const handleKeyPress = (key) => {
     handleTypedLetter(key);
@@ -82,8 +113,24 @@ function GameContent() {
     }
   }, [pressedKey]);
 
+  // Play audio feedback when isCorrect changes
+  useEffect(() => {
+    if (isCorrect === true) {
+      playCorrect();
+    } else if (isCorrect === false) {
+      playIncorrect();
+    }
+  }, [isCorrect, playCorrect, playIncorrect]);
+
+  const toggleSound = () => {
+    setSoundEnabled((prev) => !prev);
+  };
+
   return (
     <AppContainer>
+      <SoundToggle onClick={toggleSound} aria-label="Toggle sound">
+        {soundEnabled ? '🔊' : '🔇'}
+      </SoundToggle>
       <ModeToggle onClick={toggleMode}>
         Mode: {mode === 'sequential' ? 'Sequential' : 'Random'}
       </ModeToggle>

@@ -542,10 +542,35 @@ src/
 - Audio files are public domain
 
 ### Tests (Manual)
-- [ ] Correct letter plays sound
-- [ ] Incorrect letter plays sound
-- [ ] Toggle mutes sounds
-- [ ] Sounds don't overlap/lag
+- [x] Correct letter plays sound
+- [x] Incorrect letter plays sound
+- [x] Toggle mutes sounds
+- [x] Sounds don't overlap/lag
+
+### Status
+✅ COMPLETED
+
+**Completed:** 2025-11-04
+
+**Implementation Notes:**
+- Web Audio API used for 100% public domain sound generation (no external files)
+- useAudioFeedback.js: programmatic audio synthesis with error handling
+- Correct sound: C5 + E5 harmonious chime (523Hz + 659Hz, 0.3s duration)
+- Incorrect sound: 200Hz sawtooth buzz (0.2s duration)
+- Sound toggle button (top-left): 🔊/🔇 emoji icons
+- Envelope shaping: exponential decay for natural sound
+- Audio triggered via useEffect on isCorrect state changes
+- Lazy AudioContext initialization to avoid autoplay issues
+- Build verified: 342.86 kB bundle (110.89 kB gzipped)
+
+**Files Created:**
+- `src/hooks/useAudioFeedback.js`
+- `public/sounds/generate-sounds.js` (reference only, not used in prod)
+
+**Files Modified:**
+- `src/components/App.jsx`
+
+**No Issues**
 
 ---
 
