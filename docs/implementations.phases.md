@@ -210,10 +210,33 @@ src/
 - Clear visual distinction
 
 ### Tests (Manual)
-- [ ] Type correct letter → success message
-- [ ] Type incorrect letter → both letters shown
-- [ ] Green = expected, Red = typed
-- [ ] Special keys (Enter, Shift) ignored
+- [x] Type correct letter → success message
+- [x] Type incorrect letter → both letters shown
+- [x] Green = expected, Red = typed
+- [x] Special keys (Enter, Shift) ignored
+
+### Status
+✅ COMPLETED
+
+**Completed:** 2025-11-04
+
+**Implementation Notes:**
+- useKeyboardInput hook captures A-Z keypress events, filters non-letter keys
+- FeedbackDisplay component with 3 states: null (instruction), correct (success), incorrect (comparison)
+- App.jsx updated with typedLetter and isCorrect state management
+- Comparison view: green background (#4CAF50) for expected, red (#F44336) for typed
+- 3rem font size for comparison letters, clear labels below each
+- handleKeyPress callback compares typed vs target letter
+- Build verified: 224.96 kB bundle (72.32 kB gzipped)
+
+**Files Created:**
+- `src/hooks/useKeyboardInput.js`
+- `src/components/FeedbackDisplay.jsx`
+
+**Files Modified:**
+- `src/components/App.jsx`
+
+**No Issues**
 
 ---
 
