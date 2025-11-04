@@ -32,7 +32,7 @@ const Key = ({ letter, isPressed, isTarget }) => {
       $isPressed={isPressed}
       $isTarget={isTarget}
       role="button"
-      aria-label={`Key ${letter}`}
+      aria-label={`Touche ${letter}`}
     >
       {letter}
     </KeyButton>

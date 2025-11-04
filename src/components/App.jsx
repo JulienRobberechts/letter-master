@@ -104,7 +104,7 @@ function GameContent() {
 
   return (
     <AppContainer>
-      <SettingsButton onClick={() => setShowSettings(true)} aria-label="Open settings">
+      <SettingsButton onClick={() => setShowSettings(true)} aria-label="Ouvrir les paramètres">
         ⚙️
       </SettingsButton>
       <MainContent>

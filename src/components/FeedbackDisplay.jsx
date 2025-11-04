@@ -57,7 +57,7 @@ const FeedbackDisplay = ({ target, typed, isCorrect }) => {
   if (isCorrect === null) {
     return (
       <Container>
-        <Instruction>Type the letter</Instruction>
+        <Instruction>Tapez la lettre</Instruction>
       </Container>
     );
   }
@@ -70,7 +70,7 @@ const FeedbackDisplay = ({ target, typed, isCorrect }) => {
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 260, damping: 20 }}
         >
-          Correct! ✓
+          Correct ! ✓
         </Message>
       </Container>
     );
@@ -82,11 +82,11 @@ const FeedbackDisplay = ({ target, typed, isCorrect }) => {
       <ComparisonContainer>
         <ComparisonItem>
           <ComparisonLetter $isExpected={true}>{target}</ComparisonLetter>
-          <ComparisonLabel>Expected</ComparisonLabel>
+          <ComparisonLabel>Attendu</ComparisonLabel>
         </ComparisonItem>
         <ComparisonItem>
           <ComparisonLetter $isExpected={false}>{typed}</ComparisonLetter>
-          <ComparisonLabel>Typed</ComparisonLabel>
+          <ComparisonLabel>Tapé</ComparisonLabel>
         </ComparisonItem>
       </ComparisonContainer>
     </Container>

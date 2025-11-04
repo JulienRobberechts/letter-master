@@ -132,66 +132,66 @@ const SettingsPanel = ({ onClose }) => {
     <Overlay onClick={handleOverlayClick}>
       <Panel>
         <Header>
-          <Title>Settings</Title>
-          <CloseButton onClick={onClose} aria-label="Close settings">
+          <Title>Paramètres</Title>
+          <CloseButton onClick={onClose} aria-label="Fermer les paramètres">
             ×
           </CloseButton>
         </Header>
 
         <SettingRow>
-          <SettingLabel>Sound Effects</SettingLabel>
+          <SettingLabel>Effets sonores</SettingLabel>
           <ToggleButton
             $active={soundEnabled}
             onClick={toggleSound}
-            aria-label={`Sound ${soundEnabled ? 'enabled' : 'disabled'}`}
+            aria-label={`Son ${soundEnabled ? 'activé' : 'désactivé'}`}
           >
-            {soundEnabled ? '🔊 ON' : '🔇 OFF'}
+            {soundEnabled ? '🔊 ACTIVÉ' : '🔇 DÉSACTIVÉ'}
           </ToggleButton>
         </SettingRow>
 
         <SettingRow>
-          <SettingLabel>Letter Mode</SettingLabel>
+          <SettingLabel>Mode de lettres</SettingLabel>
           <RadioGroup>
             <RadioButton
               $active={letterMode === 'sequential'}
               onClick={() => setLetterMode('sequential')}
-              aria-label="Sequential mode"
+              aria-label="Mode séquentiel"
             >
-              Sequential
+              Séquentiel
             </RadioButton>
             <RadioButton
               $active={letterMode === 'random'}
               onClick={() => setLetterMode('random')}
-              aria-label="Random mode"
+              aria-label="Mode aléatoire"
             >
-              Random
+              Aléatoire
             </RadioButton>
           </RadioGroup>
         </SettingRow>
 
         <SettingRow>
-          <SettingLabel>Theme</SettingLabel>
+          <SettingLabel>Thème</SettingLabel>
           <RadioGroup>
             <RadioButton
               $active={theme === 'light'}
               onClick={() => setTheme('light')}
-              aria-label="Light theme"
+              aria-label="Thème clair"
             >
-              Light
+              Clair
             </RadioButton>
             <RadioButton
               $active={theme === 'dark'}
               onClick={() => setTheme('dark')}
-              aria-label="Dark theme"
+              aria-label="Thème sombre"
             >
-              Dark
+              Sombre
             </RadioButton>
             <RadioButton
               $active={theme === 'highContrast'}
               onClick={() => setTheme('highContrast')}
-              aria-label="High contrast theme"
+              aria-label="Thème à contraste élevé"
             >
-              High Contrast
+              Contraste élevé
             </RadioButton>
           </RadioGroup>
         </SettingRow>
