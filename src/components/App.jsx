@@ -4,7 +4,9 @@ import LetterDisplay from './LetterDisplay';
 import FeedbackDisplay from './FeedbackDisplay';
 import VirtualKeyboard from './VirtualKeyboard';
 import AnimationWrapper from './AnimationWrapper';
+import SettingsPanel from './SettingsPanel';
 import GlobalStyles from '../styles/GlobalStyles';
+import { SettingsProvider, useSettings } from '../context/SettingsContext';
 import { GameProvider, useGame } from '../context/GameContext';
 import useKeyboardInput from '../hooks/useKeyboardInput';
 import useAudioFeedback from '../hooks/useAudioFeedback';
@@ -29,33 +31,10 @@ const MainContent = styled.div`
   flex: 1;
 `;
 
-const ModeToggle = styled.button`
+const SettingsButton = styled.button`
   position: absolute;
   top: 1rem;
   right: 1rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #1976d2;
-  }
-
-  &:active {
-    background-color: #1565c0;
-  }
-`;
-
-const SoundToggle = styled.button`
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
   padding: 0.75rem;
   font-size: 1.5rem;
   background-color: #ffffff;
@@ -80,18 +59,11 @@ const SoundToggle = styled.button`
 `;
 
 function GameContent() {
-  const {
-    targetLetter,
-    typedLetter,
-    isCorrect,
-    mode,
-    handleTypedLetter,
-    advanceToNextLetter,
-    toggleMode,
-  } = useGame();
+  const { targetLetter, typedLetter, isCorrect, handleTypedLetter, advanceToNextLetter } = useGame();
+  const { soundEnabled } = useSettings();
 
   const [pressedKey, setPressedKey] = useState(null);
-  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
 
   const { playCorrect, playIncorrect } = useAudioFeedback(soundEnabled);
 
@@ -122,18 +94,11 @@ function GameContent() {
     }
   }, [isCorrect, playCorrect, playIncorrect]);
 
-  const toggleSound = () => {
-    setSoundEnabled((prev) => !prev);
-  };
-
   return (
     <AppContainer>
-      <SoundToggle onClick={toggleSound} aria-label="Toggle sound">
-        {soundEnabled ? '🔊' : '🔇'}
-      </SoundToggle>
-      <ModeToggle onClick={toggleMode}>
-        Mode: {mode === 'sequential' ? 'Sequential' : 'Random'}
-      </ModeToggle>
+      <SettingsButton onClick={() => setShowSettings(true)} aria-label="Open settings">
+        ⚙️
+      </SettingsButton>
       <MainContent>
         <AnimationWrapper isCorrect={isCorrect}>
           <LetterDisplay letter={targetLetter} />
@@ -148,6 +113,7 @@ function GameContent() {
         pressedKey={pressedKey}
         targetLetter={targetLetter}
       />
+      {showSettings && <SettingsPanel onClose={() => setShowSettings(false)} />}
     </AppContainer>
   );
 }
@@ -156,9 +122,11 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <GameProvider>
-        <GameContent />
-      </GameProvider>
+      <SettingsProvider>
+        <GameProvider>
+          <GameContent />
+        </GameProvider>
+      </SettingsProvider>
     </>
   );
 }

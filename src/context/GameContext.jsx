@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import useLetterGenerator from '../hooks/useLetterGenerator';
+import { useSettings } from './SettingsContext';
 
 const GameContext = createContext();
 
@@ -12,11 +13,11 @@ export const useGame = () => {
 };
 
 export const GameProvider = ({ children }) => {
-  const [mode, setMode] = useState('sequential');
+  const { letterMode } = useSettings();
   const [typedLetter, setTypedLetter] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
 
-  const { currentLetter: targetLetter, nextLetter } = useLetterGenerator(mode);
+  const { currentLetter: targetLetter, nextLetter } = useLetterGenerator(letterMode);
 
   const handleTypedLetter = useCallback((letter) => {
     setTypedLetter(letter);
@@ -31,18 +32,12 @@ export const GameProvider = ({ children }) => {
     }
   }, [isCorrect, nextLetter]);
 
-  const toggleMode = useCallback(() => {
-    setMode((prev) => (prev === 'sequential' ? 'random' : 'sequential'));
-  }, []);
-
   const value = {
     targetLetter,
     typedLetter,
     isCorrect,
-    mode,
     handleTypedLetter,
     advanceToNextLetter,
-    toggleMode,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
