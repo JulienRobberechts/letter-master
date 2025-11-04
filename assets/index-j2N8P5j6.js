@@ -102,7 +102,7 @@ Error generating stack: `+l.message+`
   display: flex;
   flex-direction: column;
   align-items: center;
-`,A3=({target:a,typed:i,isCorrect:s})=>s===null?P.jsx(Zc,{children:P.jsx(Q0,{children:"Tapez la lettre"})}):s===!0?P.jsxs(Zc,{role:"status","aria-live":"polite",children:[P.jsx(b3,{initial:{scale:0},animate:{scale:1},transition:{type:"spring",stiffness:260,damping:20},children:"Correct ! ✓"}),P.jsx(Q0,{children:"Tapez Enter pour une nouvelle lettre"})]}):P.jsx(Zc,{role:"status","aria-live":"polite",children:P.jsxs(T3,{children:[P.jsxs(J0,{children:[P.jsx(F0,{$isExpected:!0,children:a}),P.jsx(k0,{children:"Attendu"})]}),P.jsxs(J0,{children:[P.jsx(F0,{$isExpected:!1,children:i}),P.jsx(k0,{children:"Tapé"})]})]})}),x3=zt.div`
+`,A3=({target:a,typed:i,isCorrect:s})=>s===null?P.jsx(Zc,{children:P.jsx(Q0,{children:"Tapez la lettre"})}):s===!0?P.jsxs(Zc,{role:"status","aria-live":"polite",children:[P.jsx(b3,{initial:{scale:0},animate:{scale:1},transition:{type:"spring",stiffness:260,damping:20},children:"Correct ! ✓"}),P.jsx(Q0,{children:"Tapez 'Entrée' pour une nouvelle lettre"})]}):P.jsx(Zc,{role:"status","aria-live":"polite",children:P.jsxs(T3,{children:[P.jsxs(J0,{children:[P.jsx(F0,{$isExpected:!0,children:a}),P.jsx(k0,{children:"Attendu"})]}),P.jsxs(J0,{children:[P.jsx(F0,{$isExpected:!1,children:i}),P.jsx(k0,{children:"Tapé"})]})]})}),x3=zt.div`
   display: flex;
   align-items: center;
   justify-content: center;
