@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 const Container = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const Container = styled.div`
   margin-top: 2rem;
 `;
 
-const Message = styled.div`
+const Message = styled(motion.div)`
   font-size: 2rem;
   font-weight: bold;
   color: #4CAF50;
@@ -63,7 +64,13 @@ const FeedbackDisplay = ({ target, typed, isCorrect }) => {
   if (isCorrect === true) {
     return (
       <Container>
-        <Message>Correct!</Message>
+        <Message
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+        >
+          Correct! ✓
+        </Message>
       </Container>
     );
   }

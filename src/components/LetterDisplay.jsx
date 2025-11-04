@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 const Container = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const Letter = styled.div`
+const Letter = styled(motion.div)`
   font-size: 8rem;
   font-weight: bold;
   color: #000000;
@@ -23,7 +24,15 @@ const Letter = styled.div`
 const LetterDisplay = ({ letter }) => {
   return (
     <Container>
-      <Letter>{letter}</Letter>
+      <Letter
+        key={letter}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.3 }}
+      >
+        {letter}
+      </Letter>
     </Container>
   );
 };

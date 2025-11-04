@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import LetterDisplay from './LetterDisplay';
 import FeedbackDisplay from './FeedbackDisplay';
 import VirtualKeyboard from './VirtualKeyboard';
+import AnimationWrapper from './AnimationWrapper';
 import GlobalStyles from '../styles/GlobalStyles';
 import { GameProvider, useGame } from '../context/GameContext';
 import useKeyboardInput from '../hooks/useKeyboardInput';
@@ -87,7 +88,9 @@ function GameContent() {
         Mode: {mode === 'sequential' ? 'Sequential' : 'Random'}
       </ModeToggle>
       <MainContent>
-        <LetterDisplay letter={targetLetter} />
+        <AnimationWrapper isCorrect={isCorrect}>
+          <LetterDisplay letter={targetLetter} />
+        </AnimationWrapper>
         <FeedbackDisplay
           target={targetLetter}
           typed={typedLetter}
