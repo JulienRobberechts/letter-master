@@ -72,6 +72,7 @@ const FeedbackDisplay = ({ target, typed, isCorrect }) => {
         >
           Correct ! ✓
         </Message>
+        <Instruction>Tapez Enter pour une nouvelle lettre</Instruction>
       </Container>
     );
   }
