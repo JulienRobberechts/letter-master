@@ -13,12 +13,12 @@ const Container = styled.div`
 const Message = styled(motion.div)`
   font-size: 2rem;
   font-weight: bold;
-  color: #4CAF50;
+  color: ${props => props.theme.correct};
 `;
 
 const Instruction = styled.div`
   font-size: 1.5rem;
-  color: #666666;
+  color: ${props => props.theme.instructionText};
 `;
 
 const ComparisonContainer = styled.div`
@@ -33,16 +33,17 @@ const ComparisonLetter = styled.div`
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   color: #ffffff;
-  background-color: ${props => props.$isExpected ? '#4CAF50' : '#F44336'};
+  background-color: ${props => props.$isExpected ? props.theme.correct : props.theme.incorrect};
   min-width: 80px;
   text-align: center;
+  transition: background-color 0.3s;
 `;
 
 const ComparisonLabel = styled.div`
   font-size: 0.875rem;
   text-align: center;
   margin-top: 0.5rem;
-  color: #666666;
+  color: ${props => props.theme.instructionText};
   font-weight: 600;
 `;
 
@@ -63,7 +64,7 @@ const FeedbackDisplay = ({ target, typed, isCorrect }) => {
 
   if (isCorrect === true) {
     return (
-      <Container>
+      <Container role="status" aria-live="polite">
         <Message
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -77,7 +78,7 @@ const FeedbackDisplay = ({ target, typed, isCorrect }) => {
 
   // isCorrect === false
   return (
-    <Container>
+    <Container role="status" aria-live="polite">
       <ComparisonContainer>
         <ComparisonItem>
           <ComparisonLetter $isExpected={true}>{target}</ComparisonLetter>

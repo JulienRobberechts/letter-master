@@ -12,13 +12,14 @@ const Container = styled.div`
 const Letter = styled(motion.div)`
   font-size: 8rem;
   font-weight: bold;
-  color: #000000;
-  background-color: #ffffff;
+  color: ${props => props.theme.letterText};
+  background-color: ${props => props.theme.letterBg};
   padding: 2rem 3rem;
   border-radius: 1rem;
-  border: 4px solid #000000;
+  border: 4px solid ${props => props.theme.letterBorder};
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   user-select: none;
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
 `;
 
 const LetterDisplay = ({ letter }) => {

@@ -7,6 +7,7 @@ import AnimationWrapper from './AnimationWrapper';
 import SettingsPanel from './SettingsPanel';
 import GlobalStyles from '../styles/GlobalStyles';
 import { SettingsProvider, useSettings } from '../context/SettingsContext';
+import { ThemeProvider } from '../context/ThemeContext';
 import { GameProvider, useGame } from '../context/GameContext';
 import useKeyboardInput from '../hooks/useKeyboardInput';
 import useAudioFeedback from '../hooks/useAudioFeedback';
@@ -18,9 +19,11 @@ const AppContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: ${props => props.theme.bg};
+  color: ${props => props.theme.text};
   padding: 2rem 1rem;
   gap: 2rem;
+  transition: background-color 0.3s, color 0.3s;
 `;
 
 const MainContent = styled.div`
@@ -37,8 +40,9 @@ const SettingsButton = styled.button`
   right: 1rem;
   padding: 0.75rem;
   font-size: 1.5rem;
-  background-color: #ffffff;
-  border: 2px solid #e0e0e0;
+  background-color: ${props => props.theme.buttonBg};
+  border: 2px solid ${props => props.theme.buttonBorder};
+  color: ${props => props.theme.text};
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
@@ -49,12 +53,16 @@ const SettingsButton = styled.button`
   height: 3.5rem;
 
   &:hover {
-    background-color: #f5f5f5;
-    border-color: #bdbdbd;
+    opacity: 0.8;
   }
 
   &:active {
     transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${props => props.theme.keyTarget};
+    outline-offset: 2px;
   }
 `;
 
@@ -123,9 +131,11 @@ function App() {
     <>
       <GlobalStyles />
       <SettingsProvider>
-        <GameProvider>
-          <GameContent />
-        </GameProvider>
+        <ThemeProvider>
+          <GameProvider>
+            <GameContent />
+          </GameProvider>
+        </ThemeProvider>
       </SettingsProvider>
     </>
   );

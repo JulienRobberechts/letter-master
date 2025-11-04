@@ -8,15 +8,12 @@ const KeyButton = styled.div`
   height: 60px;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #000000;
-  background-color: ${props => {
-    if (props.$isPressed) return '#FFC107';
-    return '#E0E0E0';
-  }};
+  color: ${props => props.$isPressed ? props.theme.keyPressedText : props.theme.keyText};
+  background-color: ${props => props.$isPressed ? props.theme.keyPressed : props.theme.keyBg};
   border-radius: 8px;
-  border: 2px solid #CCCCCC;
+  border: 2px solid ${props => props.theme.keyBorder};
   box-shadow: ${props =>
-    props.$isTarget ? '0 0 10px #2196F3' : '0 2px 4px rgba(0, 0, 0, 0.1)'
+    props.$isTarget ? `0 0 10px ${props.theme.keyTarget}` : '0 2px 4px rgba(0, 0, 0, 0.1)'
   };
   user-select: none;
   cursor: default;

@@ -15,13 +15,15 @@ const Overlay = styled.div`
 `;
 
 const Panel = styled.div`
-  background-color: #ffffff;
+  background-color: ${props => props.theme.panelBg};
+  color: ${props => props.theme.panelText};
   border-radius: 12px;
   padding: 2rem;
   min-width: 400px;
   max-width: 90%;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   position: relative;
+  transition: background-color 0.3s, color 0.3s;
 `;
 
 const Header = styled.div`
@@ -35,13 +37,14 @@ const Title = styled.h2`
   margin: 0;
   font-size: 1.75rem;
   font-weight: bold;
-  color: #000000;
+  color: ${props => props.theme.panelText};
 `;
 
 const CloseButton = styled.button`
   background: none;
   border: none;
   font-size: 1.5rem;
+  color: ${props => props.theme.panelText};
   cursor: pointer;
   padding: 0.25rem;
   display: flex;
@@ -50,10 +53,15 @@ const CloseButton = styled.button`
   width: 2rem;
   height: 2rem;
   border-radius: 4px;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 
   &:hover {
-    background-color: #f5f5f5;
+    opacity: 0.7;
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${props => props.theme.keyTarget};
+    outline-offset: 2px;
   }
 `;
 
@@ -68,7 +76,7 @@ const SettingRow = styled.div`
 const SettingLabel = styled.div`
   font-size: 1rem;
   font-weight: 600;
-  color: #333333;
+  color: ${props => props.theme.panelText};
   margin-bottom: 0.75rem;
 `;
 
@@ -112,7 +120,7 @@ const RadioButton = styled.button`
 `;
 
 const SettingsPanel = ({ onClose }) => {
-  const { soundEnabled, letterMode, toggleSound, setLetterMode } = useSettings();
+  const { soundEnabled, letterMode, theme, toggleSound, setLetterMode, setTheme } = useSettings();
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -157,6 +165,33 @@ const SettingsPanel = ({ onClose }) => {
               aria-label="Random mode"
             >
               Random
+            </RadioButton>
+          </RadioGroup>
+        </SettingRow>
+
+        <SettingRow>
+          <SettingLabel>Theme</SettingLabel>
+          <RadioGroup>
+            <RadioButton
+              $active={theme === 'light'}
+              onClick={() => setTheme('light')}
+              aria-label="Light theme"
+            >
+              Light
+            </RadioButton>
+            <RadioButton
+              $active={theme === 'dark'}
+              onClick={() => setTheme('dark')}
+              aria-label="Dark theme"
+            >
+              Dark
+            </RadioButton>
+            <RadioButton
+              $active={theme === 'highContrast'}
+              onClick={() => setTheme('highContrast')}
+              aria-label="High contrast theme"
+            >
+              High Contrast
             </RadioButton>
           </RadioGroup>
         </SettingRow>
