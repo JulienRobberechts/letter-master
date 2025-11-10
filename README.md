@@ -1,5 +1,6 @@
-
 # Letter master
+
+This project is a vibe coded app with Claude Code. It's game for young children to recognize letter on keyboard.
 
 ### Project Overview
 
