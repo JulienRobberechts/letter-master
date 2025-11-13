@@ -5,6 +5,7 @@ import FeedbackDisplay from './FeedbackDisplay';
 import VirtualKeyboard from './VirtualKeyboard';
 import AnimationWrapper from './AnimationWrapper';
 import SettingsPanel from './SettingsPanel';
+import StreakDisplay from './StreakDisplay';
 import GlobalStyles from '../styles/GlobalStyles';
 import { SettingsProvider, useSettings } from '../context/SettingsContext';
 import { ThemeProvider } from '../context/ThemeContext';
@@ -32,6 +33,13 @@ const MainContent = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
+`;
+
+const TopBar = styled.div`
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
 `;
 
 const SettingsButton = styled.button`
@@ -104,6 +112,9 @@ function GameContent() {
 
   return (
     <AppContainer>
+      <TopBar>
+        <StreakDisplay />
+      </TopBar>
       <SettingsButton onClick={() => setShowSettings(true)} aria-label="Ouvrir les paramètres">
         ⚙️
       </SettingsButton>

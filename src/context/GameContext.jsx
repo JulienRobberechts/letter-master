@@ -16,12 +16,22 @@ export const GameProvider = ({ children }) => {
   const { letterMode } = useSettings();
   const [typedLetter, setTypedLetter] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [streak, setStreak] = useState(0);
+  const [totalCorrect, setTotalCorrect] = useState(0);
 
   const { currentLetter: targetLetter, nextLetter } = useLetterGenerator(letterMode);
 
   const handleTypedLetter = useCallback((letter) => {
     setTypedLetter(letter);
-    setIsCorrect(letter === targetLetter);
+    const correct = letter === targetLetter;
+    setIsCorrect(correct);
+
+    if (correct) {
+      setStreak(prev => prev + 1);
+      setTotalCorrect(prev => prev + 1);
+    } else {
+      setStreak(0);
+    }
   }, [targetLetter]);
 
   const advanceToNextLetter = useCallback(() => {
@@ -36,6 +46,8 @@ export const GameProvider = ({ children }) => {
     targetLetter,
     typedLetter,
     isCorrect,
+    streak,
+    totalCorrect,
     handleTypedLetter,
     advanceToNextLetter,
   };
